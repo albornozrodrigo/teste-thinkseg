@@ -26,7 +26,6 @@ export class LoaderComponent implements OnInit, OnDestroy {
 
   subscribe() {
     this.subscription = this.loader.subscribe(status => {
-      console.log(status);
       this.status = status;
     });
   }

@@ -12,7 +12,6 @@ export class AppComponent implements OnInit {
   public payload;
   public error;
   public result;
-  public loading = false;
 
   constructor(public questionsService: QuestionsService, public loader: LoaderService) {
     this.loader.subscribe();
@@ -69,7 +68,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-  objectToArray(obj) {
+  private objectToArray(obj) {
     let arr = [];
 
     Object.keys(obj).map(function(key, index) {
