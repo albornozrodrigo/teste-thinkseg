@@ -1,18 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { QuestionsService } from '../providers/questions/questions.service';
+import { LoaderService } from "../providers/loader/loader.service";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   public questions = [];
   public payload;
   public error;
   public result;
+  public loading = false;
 
-  constructor(public questionsService: QuestionsService) {
+  constructor(public questionsService: QuestionsService, public loader: LoaderService) {
+    this.loader.subscribe();
+  }
+
+  ngOnInit() {
     this.getQuestions();
     this.error = false;
     this.payload = {
@@ -21,18 +27,22 @@ export class AppComponent {
   }
 
   async getQuestions() {
+    this.loader.show();
     await this.questionsService.getConfig().subscribe(res => {
       this.questions = this.objectToArray(res.questions);
       this.questions.map((data) => {
         data.options = this.objectToArray(data.options);
       });
+      this.loader.hide();
     }, err => {
       console.log(err);
       this.error = true;
+      this.loader.hide();
     });
   }
 
   async sendResult() {
+    this.loader.show();
     this.payload.answers = {};
     this.questions.map(question => {
       if(question.model && !question.hidden) {
@@ -42,9 +52,11 @@ export class AppComponent {
 
     await this.questionsService.sendQuotations(this.payload).subscribe(res => {
       this.result = res.cool_level;
+      this.loader.hide();
     }, err => {
       console.log(err);
       this.error = true;
+      this.loader.hide();
     });
   }
 
@@ -55,7 +67,6 @@ export class AppComponent {
         item.hidden = hidden;
       }
     });
-    console.log(this.questions)
   }
 
   objectToArray(obj) {
@@ -79,6 +90,7 @@ export class AppComponent {
 
       arr.push(obj[key]);
     });
+
     return arr;
   }
 }

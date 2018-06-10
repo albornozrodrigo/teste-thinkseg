@@ -1,5 +1,5 @@
 <div class="valign-wrapper">
-  <form class="card valign-center" *ngIf="questions" (ngSubmit)="sendResult()" #questionsForm="ngForm">
+  <form class="card valign-center" *ngIf="questions.length > 0" (ngSubmit)="sendResult()" #questionsForm="ngForm">
     <div class="card-body">
       <h1 class="card-title">Teste ThinkSeg</h1>
 
@@ -18,10 +18,12 @@
       </ng-container>
 
       <div *ngIf="result != null" class="alert" [ngClass]="{'alert-success': result > 0, 'alert-warning': result <= 0}" role="alert">
-        {{result > 0 ? 'Parabéns! seu Cool Level é:' : 'Vish, seu Cool Level é:'}} {{result}}
+        {{result > 0 ? 'Parabéns! seu Cool Level é:' : 'Vish, seu Cool Level é:'}} {{result}}!
       </div>
 
-      <button type="submit" class="btn btn-primary btn-block" [disabled]="!questionsForm.form.valid">Enviar resultado!</button>
+      <button type="submit" class="btn btn-primary btn-block" [disabled]="!questionsForm.form.valid">Obter resultado!</button>
     </div>
   </form>
+
+  <loader></loader>
 </div>

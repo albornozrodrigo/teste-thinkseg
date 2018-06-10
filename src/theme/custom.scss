@@ -297,20 +297,25 @@ input[type=number],
 [type=email].form-control,
 [type=tel].form-control,
 [contenteditable].form-control {
-  font-size: 1rem;
+  padding: 0;
+	border: none;
+	appearance: none;
   box-shadow: inset 0 -1px 0 #ddd;
-  transition: all 0.2s;
-  border: 0 !important;
+	font-size: 16px;
+	transition: all 0.2s;
+	background-color: transparent;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
 
   &:focus {
-    box-shadow: inset 0 -2px 0 $primary;
-  }
+		box-shadow: inset 0 -2px 0 $primary;
+	}
 
-  &[disabled],
-  &[readonly] {
-    box-shadow: none;
-    border-bottom: 1px dotted #ddd;
-  }
+	&[disabled],
+	&[readonly] {
+		box-shadow: none;
+		border-bottom: 1px dotted #ddd;
+	}
 
   &:not(textarea) {
     height: $input-height;
@@ -358,6 +363,7 @@ select.form-control {
 
   &:focus {
     box-shadow: inset 0 -2px 0 $primary;
+    border-color: transparent !important;
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAMAAACelLz8AAAAJ1BMVEUhISEhISEhISEhISEhISEhISEhISEhISEhISEhISEhISEhISEhISF8S9ewAAAADHRSTlMAAgMJC0uWpKa6wMxMdjkoAAAANUlEQVR4AeXJyQEAERAAsNl7Hf3X6xt0QL6JpZWq30pdvdadme+0PMdzvHm8YThHcT1H7K0BtOMDniZhWOgAAAAASUVORK5CYII=);
   }
 
