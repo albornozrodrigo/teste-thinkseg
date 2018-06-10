@@ -9,9 +9,12 @@ import { QuestionsService } from '../providers/questions/questions.service';
 export class AppComponent {
   public questions = [];
   public payload;
+  public error;
+  public result;
 
   constructor(public questionsService: QuestionsService) {
     this.getQuestions();
+    this.error = false;
     this.payload = {
       answers: {}
     }
@@ -25,25 +28,34 @@ export class AppComponent {
       });
     }, err => {
       console.log(err);
+      this.error = true;
     });
   }
 
   async sendResult() {
+    this.payload.answers = {};
+    this.questions.map(question => {
+      if(question.model && !question.hidden) {
+        this.payload.answers[question.key] = question.model;
+      }
+    });
+
     await this.questionsService.sendQuotations(this.payload).subscribe(res => {
-      console.log(res);
+      this.result = res.cool_level;
     }, err => {
       console.log(err);
+      this.error = true;
     });
   }
 
-  select(option, key, value) {
-    this.payload.answers[key] = value;
+  select(option) {
     let hidden = (option.action === 'show') ? false : true;
     this.questions.map(item => {
       if(item.key === option.target) {
         item.hidden = hidden;
       }
     });
+    console.log(this.questions)
   }
 
   objectToArray(obj) {
@@ -51,6 +63,7 @@ export class AppComponent {
 
     Object.keys(obj).map(function(key, index) {
       obj[key].key = key;
+      obj[key].model = null;
 
       if(obj[key].hasOwnProperty('show')) {
         obj[key].action = 'show';

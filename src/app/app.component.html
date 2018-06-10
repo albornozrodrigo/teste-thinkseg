@@ -1,15 +1,27 @@
-<div class="container">
-  <form class="card" *ngIf="questions">
+<div class="valign-wrapper">
+  <form class="card valign-center" *ngIf="questions" (ngSubmit)="sendResult()" #questionsForm="ngForm">
     <div class="card-body">
       <h1 class="card-title">Teste ThinkSeg</h1>
-      <div class="form-group" *ngFor="let question of questions" [hidden]="question.hidden">
-        <label for="{{question.key}}">{{question.label}}</label>
-        <select name="{{question.key}}" id="{{question.key}}" class="form-control" (change)="select(question.options[$event.target.selectedIndex - 1], $event.target.name, $event.target.value)">
-          <option disabled selected>Selecione uma opção</option>
-          <option *ngFor="let option of question.options" [value]="option.value">{{option.label}}</option>
-        </select>
+
+      <div *ngIf="error" class="alert alert-danger" role="alert">
+        Ocorreu um erro, por favor tente novamente!
       </div>
-      <button type="button" class="btn btn-primary btn-block" (click)="sendResult()">Enviar resultado!</button>
+
+      <ng-container *ngFor="let question of questions">
+        <div class="form-group" *ngIf="!question.hidden">
+          <label for="{{question.key}}">{{question.label}}</label>
+          <select name="{{question.key}}" id="{{question.key}}" class="form-control" (change)="select(question.options[$event.target.selectedIndex - 1])" [(ngModel)]="question.model" required>
+            <option disabled selected>Selecione uma opção</option>
+            <option *ngFor="let option of question.options" [value]="option.value">{{option.label}}</option>
+          </select>
+        </div>
+      </ng-container>
+
+      <div *ngIf="result != null" class="alert" [ngClass]="{'alert-success': result > 0, 'alert-warning': result <= 0}" role="alert">
+        {{result > 0 ? 'Parabéns! seu Cool Level é:' : 'Vish, seu Cool Level é:'}} {{result}}
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block" [disabled]="!questionsForm.form.valid">Enviar resultado!</button>
     </div>
   </form>
 </div>
