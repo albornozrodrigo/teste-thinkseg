@@ -1,0 +1,15 @@
+<div class="container">
+  <form class="card" *ngIf="questions">
+    <div class="card-body">
+      <h1 class="card-title">Teste ThinkSeg</h1>
+      <div class="form-group" *ngFor="let question of questions" [hidden]="question.hidden">
+        <label for="{{question.key}}">{{question.label}}</label>
+        <select name="{{question.key}}" id="{{question.key}}" class="form-control" (change)="select(question.options[$event.target.selectedIndex - 1], $event.target.name, $event.target.value)">
+          <option disabled selected>Selecione uma opção</option>
+          <option *ngFor="let option of question.options" [value]="option.value">{{option.label}}</option>
+        </select>
+      </div>
+      <button type="button" class="btn btn-primary btn-block" (click)="sendResult()">Enviar resultado!</button>
+    </div>
+  </form>
+</div>
