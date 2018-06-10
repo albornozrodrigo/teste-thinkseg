@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { FormsModule }   from '@angular/forms';
-import { LoadingModule } from 'ngx-loading';
 
 import { AppComponent } from './app.component';
 import { LoaderComponent } from '../components/loader/loader.component';
@@ -18,8 +17,7 @@ import { LoaderService } from '../providers/loader/loader.service';
   imports: [
     BrowserModule,
     HttpModule,
-    FormsModule,
-    LoadingModule
+    FormsModule
   ],
   providers: [
     ApiService,
