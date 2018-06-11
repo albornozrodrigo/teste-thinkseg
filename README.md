@@ -1,27 +1,46 @@
-# TesteThinkseg
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.8.
+# TesteThinkSeg
 
-## Development server
+## Iniciando
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Estas instruções irão possibilitar que você rode a aplicação em um ambiente local para fins de desenvolvimento e/ou testes.
 
-## Code scaffolding
+### Pré requisitos
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Tecnologias que você precisa ter instaladas para rodar a aplicação.
 
-## Build
+```
+NodeJS
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+### Instalando
 
-## Running unit tests
+Clone o repositório.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```
+git clone https://github.com/albornozrodrigo/teste-thinkseg
+```
 
-## Running end-to-end tests
+Entre no diretório e instale as dependências.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+```
+cd teste-thinkseg && npm i
+```
 
-## Further help
+### Rodando a aplicação
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+```
+ng serve
+```
+
+### Acessando
+
+Para testar a aplicação basta acessar o endereço abaixo.
+
+```
+http://localhost:4200
+```
+
+## Autor
+
+*  **Rodrigo Albornoz**
